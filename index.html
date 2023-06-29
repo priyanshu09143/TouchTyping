@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typing-touch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Agdasima', sans-serif;
+        }
+
+        body {
+            background-color: rgb(111, 215, 180);
+        }
+
+        .container {
+            background-color: rgb(23, 192, 192);
+            width: 30%;
+            height: 35vh;
+            text-align: center;
+            padding: 2%;
+            margin: auto;
+            border-radius: 5%;
+            margin-top: 10vh;
+            color: #fff;
+            font-weight: bolder;
+            font-size: x-large;
+        }
+        .container p{
+            font-size: xx-large;
+        }
+        .container input {
+            padding: 2%;
+            border: none;
+            border-radius: 5%;
+            text-align: center;
+            font-size: large;
+            font-weight: bold;
+        }
+        #red{
+            background-color: red;
+        }
+        #over{
+            background-color: black;
+        }
+        .message{
+            background-color: rgb(12, 90, 90);
+            width: 15%;
+            /* height: 10vh; */
+            text-align: center;
+            padding: 0.5rem;
+            margin: auto;
+            border-radius: 5%;
+            /* margin-top: vh; */
+            color: #fff;
+            font-weight: bolder;
+            font-size: x-large;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="">
+        <h1>Touch Typing</h1>
+        <p id="text"></p>
+        <input type="text" placeholder="Type Here">
+    </div>
+    <div class="message" style="display: none;">
+        <p></p>
+    </div>
+
+    <script>
+
+        // RandomStr function for Random String
+             function RandomStr(length) {
+    let result = '';
+    const characters = 'abcdefghijklmnopqrstuvwxyz ';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    } return result;  }
+document.querySelector("p").innerHTML =RandomStr(10)
+
+
+
+let para = document.querySelector("p").innerHTML;
+let check = document.querySelector("input");
+let accuracy =0
+let container = document.querySelector(".container")
+
+        check.onkeyup =()=> {
+            let str = para.slice(0,check.value.length)
+            accuracy +=1
+
+            console.log(check.value)
+            console.log(str)
+
+           if((check.value.length === para.length && check.value == str) && (para.length>0 && check.value.length>0)){
+            container.id="over"
+            document.querySelector("h1").innerHTML = "Game Over"
+            check.disabled = true;
+            let button = document.createElement("button")
+            button.innerText ="Restart Game";
+            document.querySelector("#text").innerHTML = "You Win"
+            button.onclick=()=>{
+                location.reload();
+                };
+                document.querySelector(".message").appendChild(button);
+                document.querySelector(".message").style.display="block"
+                let accu_msg = document.querySelector(".message p")
+                accu_msg.innerHTML = "Accuracy : "+((para.length/accuracy)*100).toFixed(0)
+                console.log(accuracy)
+           }
+           else{
+               if(check.value == str){
+                   container.id= ""
+                   document.querySelector(".container h1").innerHTML = "Touch Typing"
+               }
+               else{
+                   container.id="red"
+                   document.querySelector(".container h1").innerHTML = "Wrong Typing"
+               } }
+        }
+    </script>
+</body>
+
+</html>
