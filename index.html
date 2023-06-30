@@ -103,7 +103,7 @@ let container = document.querySelector(".container")
 
            if((check.value.length === para.length && check.value == str) && (para.length>0 && check.value.length>0)){
             container.id="over"
-            document.querySelector("h1").innerHTML = "Game Over"
+            document.querySelector("h1").innerHTML = "Level Completed"
             check.disabled = true;
             let button = document.createElement("button")
             button.innerText ="Restart Game";
